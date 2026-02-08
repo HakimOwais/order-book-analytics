@@ -1,0 +1,90 @@
+# OrderBook Analytics Configuration
+
+orderbook:
+  default_symbol: "BTC/USDT"
+  max_levels: 1000
+  update_frequency_ms: 100
+  snapshot_enabled: true
+  incremental_updates: true
+
+analytics:
+  spread:
+    alert_threshold_bps: 50
+    volatility_window: 100
+    trend_periods: 20
+  depth:
+    default_levels: 20
+    imbalance_alert_threshold: 0.7
+    liquidity_score_weights:
+      volume: 0.4
+      imbalance: 0.3
+      slope: 0.2
+      spread: 0.1
+  liquidity:
+    kyle_lambda_window: 50
+    amihud_window: 20
+    resilience_update_freq: 1000
+
+visualization:
+  theme: "plotly_white"
+  colors:
+    bid: "#00BFFF"
+    ask: "#FF6B6B"
+    mid: "#2E8B57"
+    spread: "#FFA500"
+  dashboard:
+    refresh_interval_ms: 1000
+    max_points: 1000
+    enable_animations: true
+
+data:
+  sources:
+    binance:
+      enabled: true
+      ws_url: "wss://stream.binance.com:9443/ws"
+      rest_url: "https://api.binance.com"
+    ftx:
+      enabled: false
+      ws_url: "wss://ftx.com/ws"
+    kraken:
+      enabled: false
+      ws_url: "wss://ws.kraken.com"
+  
+  storage:
+    raw_data_ttl_days: 7
+    processed_data_ttl_days: 30
+    compression_enabled: true
+
+logging:
+  level: "INFO"
+  file: "logs/orderbook_analytics.log"
+  max_size_mb: 100
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+performance:
+  cache_size: 10000
+  enable_caching: true
+  parallel_processing: true
+  max_workers: 4
+
+alerts:
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+  webhook:
+    enabled: false
+    url: ""
+  thresholds:
+    wide_spread_bps: 50
+    severe_imbalance: 0.7
+    low_liquidity_score: 30
+    high_slippage_bps: 100
+
+api:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["http://localhost:3000"]
+  rate_limit: "100/minute"
