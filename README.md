@@ -31,8 +31,8 @@ A high-performance, production-ready analytics engine for real-time monitoring o
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/orderbook-analytics.git
-cd orderbook-analytics
+git clone https://github.com/HakimOwais/order-book-analytics.git
+cd order-book-analytics
 
 # Install dependencies
 pip install -r requirements.txt
